@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 27
     dataBinding {
         enabled = true
     }
@@ -29,9 +29,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Please change versions in the project level build.gradle file
+
     // and should you want to add a new dependency, follow the below pattern
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
@@ -57,6 +58,7 @@ dependencies {
     // Dagger
     compile "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
     compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+
     // if you use the support libraries
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
@@ -73,11 +75,10 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-database:$rootProject.ext.playServicesVersion"
     implementation "com.google.firebase:firebase-core:$rootProject.ext.playServicesVersion"
+
     //Firebase SDK
     implementation "com.google.firebase:firebase-auth:$rootProject.ext.playServicesVersion"
     implementation "com.google.android.gms:play-services-auth:$rootProject.ext.playServicesVersion"
-
-
     compile 'org.jetbrains:annotations-java5:15.0'
     compile 'com.google.android.gms:play-services-maps:11.8.0'
 }

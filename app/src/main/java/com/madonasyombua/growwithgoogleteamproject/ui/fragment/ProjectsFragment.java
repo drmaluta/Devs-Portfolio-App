@@ -1,6 +1,8 @@
 package com.madonasyombua.growwithgoogleteamproject.ui.fragment;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.madonasyombua.growwithgoogleteamproject.interfaces.OnFragmentInteractionListener;
 import com.madonasyombua.growwithgoogleteamproject.R;
@@ -38,6 +41,8 @@ public class ProjectsFragment extends Fragment {
     private List<Portfolio> portfolioList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PortfolioAdapter mAdapter;
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,6 +87,8 @@ public class ProjectsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         recyclerView = view.findViewById(R.id.portfolio_recycler_view);
+        //btnView = view.findViewById(R.id.btn_view);
+
 
         mAdapter = new PortfolioAdapter(portfolioList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -95,11 +102,32 @@ public class ProjectsFragment extends Fragment {
         return view;
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+
+    }
+
+    @Override
+    public void onActivityCreated (Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        //final Button btnView = view.findViewById(R.id.btn_login);
+
+        Button btnView = (Button)getActivity().findViewById(R.id.btn_view);
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://www.google.com"));
+                v.getContext().startActivity(i);
+
+            }
+        });
+
     }
 
     private void testPortfolioData() {

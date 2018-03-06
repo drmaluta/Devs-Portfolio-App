@@ -200,14 +200,14 @@
                 android:paddingRight="8dp"
                 android:text="@string/lorem_ipsum"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_login"
+                app:layout_constraintBottom_toTopOf="@+id/btn_view"
                 app:layout_constraintEnd_toStartOf="@+id/portfolio_vertical_divider"
                 app:layout_constraintStart_toStartOf="@+id/shortDescription"
                 app:layout_constraintTop_toBottomOf="@+id/shortDescription" />
 
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_view"
                 android:layout_width="62dp"
                 android:layout_height="25dp"
                 android:layout_marginBottom="16dp"
