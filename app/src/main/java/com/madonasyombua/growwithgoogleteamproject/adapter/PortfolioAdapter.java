@@ -4,10 +4,13 @@ package com.madonasyombua.growwithgoogleteamproject.adapter;
  * Created by jantz on 2/18/2018.
  */
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +46,16 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.portfolio_list_row, parent, false);
+        Button btnView = itemView.findViewById(R.id.btn_view);
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://www.google.com"));
+                v.getContext().startActivity(i);
+
+            }
+        });
 
         return new MyViewHolder(itemView);
     }

@@ -87,7 +87,6 @@ public class ProjectsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         recyclerView = view.findViewById(R.id.portfolio_recycler_view);
-        //btnView = view.findViewById(R.id.btn_view);
 
 
         mAdapter = new PortfolioAdapter(portfolioList);
@@ -108,25 +107,6 @@ public class ProjectsFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-
-    }
-
-    @Override
-    public void onActivityCreated (Bundle savedInstanceState){
-        super.onActivityCreated(savedInstanceState);
-        //final Button btnView = view.findViewById(R.id.btn_login);
-
-        Button btnView = (Button)getActivity().findViewById(R.id.btn_view);
-
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("https://www.google.com"));
-                v.getContext().startActivity(i);
-
-            }
-        });
 
     }
 
