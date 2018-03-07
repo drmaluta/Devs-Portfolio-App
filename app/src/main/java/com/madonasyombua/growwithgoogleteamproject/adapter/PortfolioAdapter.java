@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.madonasyombua.growwithgoogleteamproject.R;
 import com.madonasyombua.growwithgoogleteamproject.models.Portfolio;
 
+import java.net.URL;
 import java.util.List;
 
 public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyViewHolder> {
@@ -26,6 +27,8 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, longDescription, shortDescription;
         public ImageView portfolioImage;
+        public Button btnView;
+        private String url;
 
         public MyViewHolder(View view) {
             super(view);
@@ -33,6 +36,16 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
             shortDescription = (TextView) view.findViewById(R.id.shortDescription);
             longDescription = (TextView) view.findViewById(R.id.longDescription);
             portfolioImage = (ImageView) view.findViewById(R.id.portfolio_image);
+            btnView = (Button) view.findViewById(R.id.btn_view);
+            btnView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    v.getContext().startActivity(i);
+
+                }
+            });
 
         }
     }
@@ -46,16 +59,6 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.portfolio_list_row, parent, false);
-        Button btnView = itemView.findViewById(R.id.btn_view);
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("https://www.google.com"));
-                v.getContext().startActivity(i);
-
-            }
-        });
 
         return new MyViewHolder(itemView);
     }
@@ -67,6 +70,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
         holder.shortDescription.setText(portfolio.getShortDescription());
         holder.longDescription.setText(portfolio.getLongDescription());
         holder.portfolioImage.setImageResource(portfolio.getPortfolioImage());
+        holder.url = portfolio.getUrl();
     }
 
     @Override
