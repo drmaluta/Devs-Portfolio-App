@@ -8,24 +8,30 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberUtils;
 import android.text.Html;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.madonasyombua.growwithgoogleteamproject.R;
 import com.madonasyombua.growwithgoogleteamproject.databinding.FragmentProfileBinding;
 import com.madonasyombua.growwithgoogleteamproject.dialogs.ProfileFragmentDialog;
 import com.madonasyombua.growwithgoogleteamproject.interfaces.OnFragmentInteractionListener;
 import com.madonasyombua.growwithgoogleteamproject.models.User;
 import com.madonasyombua.growwithgoogleteamproject.util.Constant;
+import com.madonasyombua.growwithgoogleteamproject.util.FirebaseAction;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * <p>
+ *
  * to handle interaction events.
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -96,7 +102,6 @@ public class ProfileFragment extends Fragment
             }
         };
         gd = new GestureDetectorCompat(getActivity(), listener);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -122,6 +127,7 @@ public class ProfileFragment extends Fragment
         mBinding.homeTv.setOnTouchListener(this);
 
 
+        user.setPhone(PhoneNumberUtils.formatNumber(user.getPhone()));
         mBinding.setUser(user);
         setStatus(false/*TODO: Replace with user.getStatus*/);
         mBinding.intro.setText(Html.fromHtml("<u>Intro</u>"));
@@ -149,9 +155,32 @@ public class ProfileFragment extends Fragment
 
     @Override
     public void submit(Bundle data) {
-        //TODO: update DB with data
         user = User.build(user, data);
+        user.setPhone(PhoneNumberUtils.formatNumber(user.getPhone()));
         mBinding.setUser(user);
+        FirebaseAction.write(user, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    Toast.makeText(getContext(), "User created", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error creating user:" +
+                            databaseError.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
     }
 
     @Override
@@ -186,9 +215,14 @@ public class ProfileFragment extends Fragment
         return fragment;
     }
 
+    /**
+     * Sets the user status and updates indicator
+     * according to online state
+     *
+     * @param online The status of the user
+     */
     private void setStatus(boolean online) {
         if (online) {
-
             mBinding.status.setCompoundDrawablesWithIntrinsicBounds(getResources()
                     .getDrawable(R.drawable.ic_online), null, null, null);
             mBinding.status.setText(getString(R.string.online));

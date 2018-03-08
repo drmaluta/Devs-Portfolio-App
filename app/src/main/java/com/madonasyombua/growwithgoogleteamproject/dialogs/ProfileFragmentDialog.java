@@ -72,6 +72,7 @@ public class ProfileFragmentDialog extends DialogFragment {
     }
 
     private Bundle submit(){
+
         Bundle data = new Bundle(5);
         data.putString(Constant.INTRO,getString(mBinding.introEdit));
         data.putString(Constant.PHONE,getString(mBinding.phoneEdit));
@@ -91,6 +92,7 @@ public class ProfileFragmentDialog extends DialogFragment {
 
         return view.toString();
     }
+
 
 
     /**
