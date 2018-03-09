@@ -76,6 +76,7 @@ dependencies {
     //Firebase SDK
     implementation "com.google.firebase:firebase-auth:$rootProject.ext.playServicesVersion"
     implementation "com.google.android.gms:play-services-auth:$rootProject.ext.playServicesVersion"
+    compile "com.google.firebase:firebase-storage:$rootProject.ext.playServicesVersion"
 
 
     compile 'org.jetbrains:annotations-java5:15.0'
