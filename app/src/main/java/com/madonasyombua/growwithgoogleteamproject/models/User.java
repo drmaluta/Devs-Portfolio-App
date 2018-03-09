@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import com.google.firebase.database.Exclude;
 import com.madonasyombua.growwithgoogleteamproject.util.Constant;
 
+import java.util.List;
+
 /**
  * Created by chuk on 2/15/18.
  */
@@ -17,8 +19,12 @@ import com.madonasyombua.growwithgoogleteamproject.util.Constant;
 public class User extends FirebaseObject {
     private String name, password, followers, following, projects,
             email, location, phone, website, intro;
-    private Portfolio portfolio;
+    private Project project;
     private boolean status;
+    private List<Project> projectList;
+    protected Integer id;
+
+
 
     // Empty constructor
     public User() {}
@@ -49,8 +55,8 @@ public class User extends FirebaseObject {
         this.password = password;
     }
 
-    public void setPortfolio(Portfolio portfolio){
-        this.portfolio = portfolio;
+    public void setProject(Project project){
+        this.project = project;
     }
 
     public static User build(@NonNull Bundle data) {
@@ -138,5 +144,25 @@ public class User extends FirebaseObject {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean isNew() {
+        return (getId() == null);
     }
 }

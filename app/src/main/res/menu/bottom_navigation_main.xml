@@ -16,7 +16,7 @@
        android:icon="@drawable/ic_info_white"
         android:title="@string/interest"
         app:showAsAction="ifRoom" />
-    <!-- project portfolio -->
+    <!-- projprojectolio -->
 
     <item
         android:id="@+id/action_projects"

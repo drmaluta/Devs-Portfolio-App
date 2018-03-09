@@ -15,14 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.madonasyombua.growwithgoogleteamproject.R;
-import com.madonasyombua.growwithgoogleteamproject.models.Portfolio;
+import com.madonasyombua.growwithgoogleteamproject.models.Project;
 
-import java.net.URL;
 import java.util.List;
 
 public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyViewHolder> {
 
-    private List<Portfolio> portfolioList;
+    private List<Project> projectList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, longDescription, shortDescription;
@@ -51,8 +50,8 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
     }
 
 
-    public PortfolioAdapter(List<Portfolio> portfolioList) {
-        this.portfolioList = portfolioList;
+    public PortfolioAdapter(List<Project> projectList) {
+        this.projectList = projectList;
     }
 
     @Override
@@ -65,16 +64,16 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Portfolio portfolio = portfolioList.get(position);
-        holder.title.setText(portfolio.getTitle());
-        holder.shortDescription.setText(portfolio.getShortDescription());
-        holder.longDescription.setText(portfolio.getLongDescription());
-        holder.portfolioImage.setImageResource(portfolio.getPortfolioImage());
-        holder.url = portfolio.getUrl();
+        Project project = projectList.get(position);
+        holder.title.setText(project.getTitle());
+        holder.shortDescription.setText(project.getShortDescription());
+        holder.longDescription.setText(project.getLongDescription());
+        holder.portfolioImage.setImageResource(project.getPortfolioImage());
+        holder.url = project.getUrl();
     }
 
     @Override
     public int getItemCount() {
-        return portfolioList.size();
+        return projectList.size();
     }
 }

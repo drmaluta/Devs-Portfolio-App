@@ -24,7 +24,7 @@ public class OnBoardingActivity extends AhoyOnboarderActivity {
         super.onCreate(savedInstanceState);
 
         //Creating the cards for the intro
-        AhoyOnboarderCard card1 = new AhoyOnboarderCard("Developers Portfolio", "Welcome! ",R.drawable.logo);
+        AhoyOnboarderCard card1 = new AhoyOnboarderCard("Developers Project", "Welcome! ",R.drawable.logo);
         card1.setBackgroundColor(R.color.black_transparent);
         card1.setTitleColor(R.color.white);
         card1.setDescriptionColor(R.color.grey_200);

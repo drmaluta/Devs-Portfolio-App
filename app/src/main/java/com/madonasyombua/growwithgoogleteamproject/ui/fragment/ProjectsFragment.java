@@ -1,8 +1,6 @@
 package com.madonasyombua.growwithgoogleteamproject.ui.fragment;
 
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,12 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.madonasyombua.growwithgoogleteamproject.R;
 import com.madonasyombua.growwithgoogleteamproject.adapter.PortfolioAdapter;
 import com.madonasyombua.growwithgoogleteamproject.interfaces.OnFragmentInteractionListener;
-import com.madonasyombua.growwithgoogleteamproject.models.Portfolio;
+import com.madonasyombua.growwithgoogleteamproject.models.Project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +36,7 @@ public class ProjectsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private List<Portfolio> portfolioList = new ArrayList<>();
+    private List<Project> projectList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PortfolioAdapter mAdapter;
 
@@ -90,7 +87,7 @@ public class ProjectsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.portfolio_recycler_view);
 
 
-        mAdapter = new PortfolioAdapter(portfolioList);
+        mAdapter = new PortfolioAdapter(projectList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -112,17 +109,17 @@ public class ProjectsFragment extends Fragment {
     }
 
     private void testPortfolioData() {
-        Portfolio portfolio = new Portfolio("Simple Maths", "Android Application", "Simple Maths is a" +
+        Project project = new Project("Simple Maths", "Android Application", "Simple Maths is a" +
                 "mobile app project that I did for kids. It's a learning app for Arithmetic", R.drawable.ic_facebook, "http://www.facebook.com");
-        portfolioList.add(portfolio);
+        projectList.add(project);
 
-        portfolio = new Portfolio("Essay Tutors", "Web Development", "This is an online tutoring network" +
+        project = new Project("Essay Tutors", "Web Development", "This is an online tutoring network" +
                 "for teachers and students.", R.drawable.logo, "http://www.udacity.com");
-        portfolioList.add(portfolio);
+        projectList.add(project);
 
-        portfolio = new Portfolio("Budgeting Buddy", "Android Development", "This is a budgeting planner" +
+        project = new Project("Budgeting Buddy", "Android Development", "This is a budgeting planner" +
                 " and expense tracking mobile device for Android devices.", R.drawable.ic_google, "https://www.google.com");
-        portfolioList.add(portfolio);
+        projectList.add(project);
 
         mAdapter.notifyDataSetChanged();
     }
