@@ -12,10 +12,11 @@ import java.net.URL;
  * Created by jantz on 2/18/2018.
  */
 
-public class Project {
+public class Project extends FirebaseObject {
     private String title, shortDescription, longDescription;
     private int portfolioImage;
     private String url;
+    private String userKey;
 
     public Project() {
     }
@@ -27,6 +28,17 @@ public class Project {
         this.portfolioImage = portfolioImage;
         this.url = url;
     }
+
+    @Override
+    public String getPath() {
+        return getBase() + Paths.SL + getKey();
+    }
+
+    @Override
+    public String getBase() {
+        return Paths.USER + Paths.SL + userKey + Paths.SL + Paths.PROJECT;
+    }
+
 
     public String getTitle() {
         return title;
@@ -66,5 +78,13 @@ public class Project {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUserKey() {
+        return userKey;
+    }
+
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
     }
 }

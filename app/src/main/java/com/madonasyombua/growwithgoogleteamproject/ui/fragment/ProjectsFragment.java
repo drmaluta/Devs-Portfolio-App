@@ -1,9 +1,11 @@
 package com.madonasyombua.growwithgoogleteamproject.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.madonasyombua.growwithgoogleteamproject.R;
+import com.madonasyombua.growwithgoogleteamproject.actvities.ProjectsActivity;
 import com.madonasyombua.growwithgoogleteamproject.adapter.PortfolioAdapter;
 import com.madonasyombua.growwithgoogleteamproject.interfaces.OnFragmentInteractionListener;
 import com.madonasyombua.growwithgoogleteamproject.models.Project;
@@ -93,6 +97,16 @@ public class ProjectsFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+        FloatingActionButton addProject = view.findViewById(R.id.add_project);
+        if (addProject != null){
+            addProject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openProjectsActivity(view);
+                }
+            });
+        }
+
         testPortfolioData();
 
 
@@ -105,6 +119,13 @@ public class ProjectsFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+
+    }
+
+    private void openProjectsActivity(@SuppressWarnings("unused") View view) {
+        Intent intent = new Intent(this.getActivity(), ProjectsActivity.class);
+        startActivity(intent);
+        Toast.makeText(getContext(), "Adding Project", Toast.LENGTH_SHORT).show();
 
     }
 
